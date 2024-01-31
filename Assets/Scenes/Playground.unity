@@ -307,7 +307,7 @@ MonoBehaviour:
   platTest1: {fileID: 998574763}
   platTest2: {fileID: 3709624}
   faceRight: 0
-  interactText: {fileID: 0}
+  interactText: {fileID: 1774740898}
 --- !u!1 &141878521
 GameObject:
   m_ObjectHideFlags: 0
@@ -778,7 +778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1774740897
 RectTransform:
   m_ObjectHideFlags: 0
