@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using TMPro;
+using UnityEngine;
 using UnityEngine.SceneManagement; //loading levels
 using UnityEngine.UI; //UI text and images
 
@@ -8,26 +9,16 @@ public class PlayerController : MonoBehaviour {
     public float speed = 15;
     public float jump = 400;
     public GameObject platTest1, platTest2;
-    int numGrenades = 0;
-    int totalGrenades = 7;
     public bool faceRight;
-    public Text scoreText, objectiveText;
-    public Image objectiveBackground;
-    public GameObject bulletPrefab;
-    AudioSource aud;
-    public AudioClip winSound, startCor;
-    public int counter = 0;
+    public TextMeshProUGUI interactText;
+
+
 
 	// Use this for initialization
 	void Start () {
         rb2d = GetComponent<Rigidbody2D>();
         faceRight = true;
         //aud = GetComponent<AudioSource>();
-        //aud.PlayOneShot(startCor);
-
-        //scoreText.text = "Score: " + numGrenades;
-        //objectiveText.text = "\t   OBJECTIVE: \nSURVIVE AND COLLECT";
-       // objectiveBackground.enabled = false;
 	}
 	
 	// Update is called once per frame
@@ -89,16 +80,6 @@ public class PlayerController : MonoBehaviour {
             //create player projectile, player position, default rotation
             Instantiate(bulletPrefab, transform.position, Quaternion.identity);
         }*/
-
-        if(numGrenades >= totalGrenades)
-        {
-            objectiveText.text = "\tOBJECTIVE: \nFINISH THE FIGHT";
-            counter++;
-            if (counter == 1)
-            {
-                aud.PlayOneShot(winSound);
-            }
-        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -106,12 +87,7 @@ public class PlayerController : MonoBehaviour {
         //"pickup" tag collision
         if(collision.tag == "Pickup")
         {
-            Destroy(collision.gameObject);
-            numGrenades++;
 
-            //Display score to console
-            print("Grenades: " + numGrenades);
-            scoreText.text = "Score: " + numGrenades;
         }
 
         ///respawn zone collision
@@ -125,6 +101,20 @@ public class PlayerController : MonoBehaviour {
         {
             //reload the scene due to death. He is Spartan 1 now
             SceneManager.LoadScene(0);
+        }
+
+        if(collision.tag == "Soul")
+        {
+            interactText.gameObject.SetActive(true);
+            interactText.gameObject.transform.position = Camera.main.WorldToScreenPoint(collision.gameObject.transform.position + new Vector3(0, 2.0f, 0));
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if(collision.tag == "Soul")
+        {
+            interactText.gameObject.SetActive(false);
         }
     }
 
