@@ -12,4 +12,4 @@ When you take the soul of a character, they grey out and "sulk" (move slowly, on
 ## Pollito
 - Floating Mexican duck in a cloud at the end of the game
 - Allows player to quit or restart for different play through
-![POLLITO PICTURED](/assets/images/pollito.png)
+![POLLITO PICTURED](/Assets/Images/pollito.png)
