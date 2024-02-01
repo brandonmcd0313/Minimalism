@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,18 +6,37 @@ using UnityEngine;
 public abstract class Civilian : MonoBehaviour
 {
     bool isInteractable = true;
+    private Rigidbody2D rb;
+    private float dirX = -1f;
+    private float moveSpeed = 3f;
+    private bool facingRight = false;
+    private Vector3 localScale;
+    public GameObject rightTest, leftTest;
+
 
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        localScale = transform.localScale;
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    private void FixedUpdate()
+    {
+        //Check if the civilian is still on the platform
+        if (Physics2D.OverlapArea(rightTest.transform.position, leftTest.transform.position) == null)
+        {
+            Flip();
+        }
+
+        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
     }
 
     protected virtual void FadeColor()
