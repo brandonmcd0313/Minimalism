@@ -1,128 +1,105 @@
 ﻿using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement; //loading levels
-using UnityEngine.UI; //UI text and images
+using UnityEngine.SceneManagement;
 
-public class PlayerController : MonoBehaviour {
-
-    Rigidbody2D rb2d; // reference to RigidBody2d
+public class PlayerController : MonoBehaviour
+{
+    Rigidbody2D rb2d;
     public float speed = 15;
     public float jump = 400;
     public GameObject platTest1, platTest2;
     public bool faceRight;
     public TextMeshProUGUI interactText;
+    private IInteractable interactableInRange;
 
-
-
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
         rb2d = GetComponent<Rigidbody2D>();
         faceRight = true;
-        //aud = GetComponent<AudioSource>();
-	}
-	
-	// Update is called once per frame
-	void Update () {
-        //Left-right movement
-        //A = left, D = Right
-        if (Input.GetKey(KeyCode.A))
-        {
-            if (faceRight)
-            {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-                faceRight = !faceRight;
-            }
+    }
 
-            transform.position -= new Vector3(speed * Time.deltaTime, 0);
+    void Update()
+    {
+        HandleMovement();
+        HandleJump();
+        HandleInteraction();
+    }
+
+    private void HandleMovement()
+    {
+        float moveHorizontal = Input.GetAxis("Horizontal");
+
+        if (moveHorizontal > 0 && !faceRight || moveHorizontal < 0 && faceRight)
+        {
+            Flip();
         }
 
-        if (Input.GetKey(KeyCode.D))
-        {
-            if (!faceRight)
-            {
-                transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
-                faceRight = !faceRight;
-            }
+        transform.position += new Vector3(moveHorizontal * speed * Time.deltaTime, 0);
+    }
 
-            transform.position += new Vector3(speed * Time.deltaTime, 0);
-            faceRight = true;
-        }
+    private void Flip()
+    {
+        faceRight = !faceRight;
+        transform.localScale = new Vector3(transform.localScale.x * -1, transform.localScale.y, transform.localScale.z);
+    }
 
-        //Thruster (F)
-        if (Input.GetKey(KeyCode.F))
-        {
-            if (faceRight)
-            {
-                transform.position += new Vector3(speed * 3 * Time.deltaTime, 0);
-            }
-            else
-            {
-                transform.position -= new Vector3(speed * Time.deltaTime, 0);
-            }
-
-        }
-
-        //Jump (= SPACE) when on a platform, not air
-        bool canJump = true;
-        if (Physics2D.OverlapArea(platTest1.transform.position, platTest2.transform.position))
-            canJump = (Physics2D.OverlapArea(platTest1.transform.position, platTest2.transform.position).tag == "Platform") || (Physics2D.OverlapArea(platTest1.transform.position, platTest2.transform.position).tag == "Enemy Projectile");
-        else canJump = false;
-
+    private void HandleJump()
+    {
+        bool canJump = Physics2D.OverlapArea(platTest1.transform.position, platTest2.transform.position) != null;
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             rb2d.AddForce(new Vector3(0, jump));
         }
+    }
 
-
-        /*Fire (left click)
-        if (Input.GetMouseButtonDown(0))
+    private void HandleInteraction()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && interactableInRange != null)
         {
-            //create player projectile, player position, default rotation
-            Instantiate(bulletPrefab, transform.position, Quaternion.identity);
-        }*/
+            interactableInRange.Interact();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        //"pickup" tag collision
-        if(collision.tag == "Pickup")
-        {
+        // Check the collided object and its parent for the IInteractable component
+        IInteractable interactable = collision.GetComponent<IInteractable>() ?? collision.transform.parent.GetComponent<IInteractable>();
 
-        }
-
-        ///respawn zone collision
-        if(collision.tag == "Respawn")
+        // Proceed only if an IInteractable component is found
+        if (interactable != null)
         {
-            SceneManager.LoadScene(0);
-        }
+            interactableInRange = interactable; // Set the current interactable object
+            interactableInRange.ShowInteractionPrompt(); // Show interaction prompt
 
-        //Enemy shot collision
-        if(collision.tag == "Enemy Projectile")
-        {
-            //reload the scene due to death. He is Spartan 1 now
-            SceneManager.LoadScene(0);
-        }
-
-        if(collision.tag == "Soul")
-        {
-            interactText.gameObject.SetActive(true);
-            interactText.gameObject.transform.position = Camera.main.WorldToScreenPoint(collision.gameObject.transform.position + new Vector3(0, 2.0f, 0));
+            // Activate the interaction text UI, if it exists and is assigned
+            if (interactText != null)
+            {
+                interactText.gameObject.SetActive(true);
+                // Adjust the position of the interaction text UI based on the interactable object's position
+                interactText.gameObject.transform.position = Camera.main.WorldToScreenPoint(collision.transform.position + new Vector3(0, 2.0f, 0));
+            }
         }
     }
+
+
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.tag == "Soul")
+        // Check the collided object and its parent for the IInteractable component
+        IInteractable interactable = collision.GetComponent<IInteractable>() ?? collision.transform.parent.GetComponent<IInteractable>();
+
+        // Proceed only if an IInteractable component is found and matches interactableInRange
+        if (interactable != null && interactableInRange == interactable)
         {
-            interactText.gameObject.SetActive(false);
+            interactableInRange.HideInteractionPrompt(); // Hide interaction prompt
+            interactableInRange = null; // Clear the current interactable object
+
+            // Deactivate the interaction text UI, if it exists and is assigned
+            if (interactText != null)
+            {
+                interactText.gameObject.SetActive(false);
+            }
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        //"enemy" tag collision
-        if(collision.gameObject.tag == "Enemy"){
-            print("HYAH!");
-        }
-    }
 }
