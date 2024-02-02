@@ -23,6 +23,6 @@ public class ExampleCivilian : Civilian, IInteractable
     {
         //can add stuff like an inital attack here...
         base.FadeColor(); // Call the base interaction logic, which changes the color to gray
-
+        base.StealColor();
     }
 }

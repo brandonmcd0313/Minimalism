@@ -2,16 +2,18 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.VirtualTexturing;
 
 public abstract class Civilian : MonoBehaviour
 {
     bool isInteractable = true;
     private Rigidbody2D rb;
+    public ParticleSystem particle;
     private float dirX = -1f;
     private float moveSpeed = 3f;
     private bool facingRight = false;
     private Vector3 localScale;
-    public GameObject rightTest, leftTest;
+    public GameObject rightTest, leftTest, player;
 
 
 
@@ -21,6 +23,7 @@ public abstract class Civilian : MonoBehaviour
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
     }
+
 
     // Update is called once per frame
     void Update()
@@ -47,6 +50,8 @@ public abstract class Civilian : MonoBehaviour
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
     }
 
+
+
     protected virtual void FadeColor()
     {
         if (!isInteractable)
@@ -60,6 +65,18 @@ public abstract class Civilian : MonoBehaviour
         //change the color of the civilian to be gray
         StartCoroutine(ChangeSpriteColorToGray());
     }
+
+    protected virtual void StealColor()
+    {
+        //set particle shape rotation to face the player on the y axis
+        particle.transform.rotation = Quaternion.Euler(0, 0, 0);
+        particle.Play();
+        while(particle.isPlaying)
+        {
+            particle.transform.position = transform.position;
+        }
+    }
+    
 
     IEnumerator ChangeSpriteColorToGray()
     {
@@ -80,6 +97,7 @@ public abstract class Civilian : MonoBehaviour
 
         while (timePassed < duration)
         {
+
             // Calculate the fraction of the duration that has passed
             float lerpFraction = timePassed / duration;
 
