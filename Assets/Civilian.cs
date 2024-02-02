@@ -25,15 +25,23 @@ public abstract class Civilian : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //Raycast to check if the civilian is still on the platform
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f);
+        Debug.DrawRay(transform.position, Vector2.down, Color.red);
+        if (!hit.collider)
+        {
+            dirX = -dirX;
+        }
     }
 
     private void FixedUpdate()
     {
+        
+
         //Check if the civilian is still on the platform
         if (Physics2D.OverlapArea(rightTest.transform.position, leftTest.transform.position) == null)
         {
-            Flip();
+            dirX = -dirX;
         }
 
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
