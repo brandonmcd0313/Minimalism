@@ -6,51 +6,9 @@ using UnityEngine.Rendering.VirtualTexturing;
 
 public abstract class Civilian : MonoBehaviour
 {
+
     bool isInteractable = true;
-    private Rigidbody2D rb;
-    public ParticleSystem particle;
-    private float dirX = -1f;
-    private float moveSpeed = 3f;
-    private bool facingRight = false;
-    private Vector3 localScale;
-    public GameObject rightTest, leftTest, player;
-
-
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        localScale = transform.localScale;
-        rb = GetComponent<Rigidbody2D>();
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        //Raycast to check if the civilian is still on the platform
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1f);
-        Debug.DrawRay(transform.position, Vector2.down, Color.red);
-        if (!hit.collider)
-        {
-            dirX = -dirX;
-        }
-    }
-
-    private void FixedUpdate()
-    {
-        
-
-        //Check if the civilian is still on the platform
-        if (Physics2D.OverlapArea(rightTest.transform.position, leftTest.transform.position) == null)
-        {
-            dirX = -dirX;
-        }
-
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
-    }
-
-
+    public GameObject particlePrefab;
 
     protected virtual void FadeColor()
     {
@@ -68,10 +26,12 @@ public abstract class Civilian : MonoBehaviour
 
     protected virtual void StealColor()
     {
+        GameObject particle = Instantiate(particlePrefab, transform.position, Quaternion.identity);
         //set particle shape rotation to face the player on the y axis
         particle.transform.rotation = Quaternion.Euler(0, 0, 0);
-        particle.Play();
-        while(particle.isPlaying)
+        ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
+        particleSystem.Play();
+        while(particleSystem.isPlaying)
         {
             particle.transform.position = transform.position;
         }
