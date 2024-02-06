@@ -4,9 +4,9 @@ using UnityEngine;
 public class ExampleCivilian : Civilian, IInteractable, ICanMove
 {
     private Rigidbody2D rb;
-    public ParticleSystem particle;
+    public GameObject ParticlePrefab;
     private float dirX = -1f;
-    private float moveSpeed = 3f;
+    [SerializeField] float moveSpeed = 3f;
     private bool facingRight = false;
     private Vector3 localScale;
 
@@ -21,6 +21,10 @@ public class ExampleCivilian : Civilian, IInteractable, ICanMove
     public void Interact()
     {
         DisableMovement();
+        //spawn particle and set its color to the civilian's original color
+        GameObject particle = Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
+        ParticleEffect particleEffect = particle.GetComponent<ParticleEffect>();
+        particleEffect.SetColor(GetComponent<SpriteRenderer>().color);
         FadeColor();
     }
 
@@ -34,13 +38,6 @@ public class ExampleCivilian : Civilian, IInteractable, ICanMove
         Debug.Log("Hide interaction prompt");
     }
 
-
-    protected override void FadeColor()
-    {
-        //can add stuff like an inital attack here...
-        base.FadeColor(); // Call the base interaction logic, which changes the color to gray
-        base.StealColor();
-    }
     void Update()
     {
         Move(); // Call Move every frame

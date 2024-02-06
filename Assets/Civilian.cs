@@ -8,7 +8,6 @@ public abstract class Civilian : MonoBehaviour
 {
 
     bool isInteractable = true;
-    public GameObject particlePrefab;
 
     protected virtual void FadeColor()
     {
@@ -24,19 +23,6 @@ public abstract class Civilian : MonoBehaviour
         StartCoroutine(ChangeSpriteColorToGray());
     }
 
-    protected virtual void StealColor()
-    {
-        GameObject particle = Instantiate(particlePrefab, transform.position, Quaternion.identity);
-        //set particle shape rotation to face the player on the y axis
-        particle.transform.rotation = Quaternion.Euler(0, 0, 0);
-        ParticleSystem particleSystem = particle.GetComponent<ParticleSystem>();
-        particleSystem.Play();
-        while(particleSystem.isPlaying)
-        {
-            particle.transform.position = transform.position;
-        }
-    }
-    
 
     IEnumerator ChangeSpriteColorToGray()
     {
