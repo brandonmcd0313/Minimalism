@@ -40,20 +40,32 @@ public class ExampleCivilian : Civilian, IInteractable, ICanMove
 
     void Update()
     {
-        Move(); // Call Move every frame
+        // Cast a ray straight down to check for ground
+        RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.down, 1f);
+        Debug.DrawRay(transform.position, Vector2.down, Color.green);
 
-        // Calculate the angle of the ray based on the current direction of movement
-        // Angle the ray slightly in the direction the character is moving
-        Vector2 rayDirection = dirX > 0 ? new Vector2(0.5f, -1).normalized : new Vector2(-0.5f, -1).normalized;
-
-        // Cast the ray slightly angled based on the movement direction
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1f);
-        Debug.DrawRay(transform.position, rayDirection, Color.red);
-
-        // If the ray does not hit anything, it's time to flip
-        if (!hit.collider)
+        if (groundHit.collider)
         {
-            Flip(); // Call Flip if needed
+            // The player is on the ground, proceed with movement calculations
+            Vector2 rayDirection = dirX > 0 ? new Vector2(0.5f, -1).normalized : new Vector2(-0.5f, -1).normalized;
+
+            // Cast the ray slightly angled based on the movement direction
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1f);
+            Debug.DrawRay(transform.position, rayDirection, Color.red);
+
+            // If the ray does not hit anything, it's time to flip
+            if (!hit.collider)
+            {
+                Flip(); // Call Flip if needed
+            }
+
+            Move(); // Call Move only if the player is on the ground
+        }
+        else
+        {
+            // The player is not on the ground, so they should just fall due to gravity
+            // Ensure that gravity is properly set in the Rigidbody2D component to allow falling
+            // No need to call Move or Flip in this case
         }
     }
 
