@@ -58,8 +58,8 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
             else
             {
                 Vector2 wallHit = transform.right * dirX;
-                RaycastHit2D hit = Physics2D.Raycast(transform.position, wallHit, 0.5f);
-                Debug.DrawRay(transform.position, wallHit * 0.5f, Color.red);
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, wallHit, 0.75f);
+                Debug.DrawRay(transform.position, wallHit * 0.75f, Color.red);
 
                 // Check if the hit object is not tagged "Player" before flipping
                 if (hit.collider && hit.collider.tag != "Player")
