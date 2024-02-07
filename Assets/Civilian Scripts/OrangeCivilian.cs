@@ -41,47 +41,50 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
 
     void Update()
     {
-        // Cast a ray straight down to check for ground
         RaycastHit2D groundHit = Physics2D.Raycast(transform.position, Vector2.down, 1f);
         Debug.DrawRay(transform.position, Vector2.down, Color.green);
 
         if (groundHit.collider)
         {
-            // The player is on the ground, proceed with movement calculations
-            Vector2 rayDirection = dirX > 0 ? new Vector2(0.5f, -1).normalized : new Vector2(-0.5f, -1).normalized;
+            Vector2 forwardRayStart = transform.position + transform.right * dirX * 0.5f;
+            RaycastHit2D forwardHit = Physics2D.Raycast(forwardRayStart, Vector2.down, 1f);
+            Debug.DrawRay(forwardRayStart, Vector2.down, Color.blue);
 
-            // Cast the ray slightly angled based on the movement direction
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, rayDirection, 1f);
-            Debug.DrawRay(transform.position, rayDirection, Color.red);
-
-            // If the ray does not hit anything, it's time to flip
-            if (!hit.collider)
+            if (!forwardHit.collider)
             {
-                Flip(); // Call Flip if needed
+                Flip();
             }
 
-            Move(); // Call Move only if the player is on the ground
-        }
-        else
-        {
-            // The player is not on the ground, so they should just fall due to gravity
-            // Ensure that gravity is properly set in the Rigidbody2D component to allow falling
-            // No need to call Move or Flip in this case
+            else
+            {
+                Vector2 wallHit = transform.right * dirX;
+                RaycastHit2D hit = Physics2D.Raycast(transform.position, wallHit, 0.5f);
+                Debug.DrawRay(transform.position, wallHit * 0.5f, Color.red);
+
+                // Check if the hit object is not tagged "Player" before flipping
+                if (hit.collider && hit.collider.tag != "Player")
+                {
+                    Flip();
+                }
+            }
+
+            Move();
         }
     }
 
-    public void Move() // Implementing Move method from ICanMove
+    public void Move()
     {
         rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
     }
 
-    public void Flip() // Implementing Flip method from ICanMove
+    public void Flip()
     {
-        dirX = -dirX; // Reverse direction
+        dirX *= -1;
         facingRight = !facingRight;
         localScale.x *= -1;
         transform.localScale = localScale;
     }
+
 
     public void DisableMovement() // Implementing DisableMovement method from ICanMove
     {

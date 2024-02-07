@@ -1,7 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-public class ExampleCivilian : Civilian, IInteractable, ICanMove
+//Blue = Defender (touching them is knock back)
+public class BlueCivilian : Civilian, IInteractable, ICanMove
 {
     private Rigidbody2D rb;
     public GameObject ParticlePrefab;
