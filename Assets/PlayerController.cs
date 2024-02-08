@@ -20,12 +20,15 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
         HandleMovement();
         HandleJump();
         HandleInteraction();
     }
 
-    private void HandleMovement()
+
+
+private void HandleMovement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -34,7 +37,11 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        transform.position += new Vector3(moveHorizontal * speed * Time.deltaTime, 0);
+        // Apply a force for movement
+        rb2d.AddForce(new Vector2(moveHorizontal * speed * Time.deltaTime, 0));
+
+        // Optional: Limit the maximum speed to prevent the player from accelerating indefinitely
+        rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -10f, 10f), rb2d.velocity.y);
     }
 
     private void Flip()
@@ -72,12 +79,14 @@ public class PlayerController : MonoBehaviour
             interactableInRange.ShowInteractionPrompt(); // Show interaction prompt
 
             // Activate the interaction text UI, if it exists and is assigned
+            /*
             if (interactText != null)
             {
                 interactText.gameObject.SetActive(true);
                 // Adjust the position of the interaction text UI based on the interactable object's position
                 interactText.gameObject.transform.position = Camera.main.WorldToScreenPoint(collision.transform.position + new Vector3(0, 2.0f, 0));
             }
+            */
         }
     }
 
