@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-private void HandleMovement()
+    private void HandleMovement()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
 
@@ -42,6 +42,8 @@ private void HandleMovement()
 
         // Optional: Limit the maximum speed to prevent the player from accelerating indefinitely
         rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -10f, 10f), rb2d.velocity.y);
+
+       
     }
 
     private void Flip()

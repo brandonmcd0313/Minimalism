@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 //Red = Fighter(run at player, touching is knock back)
 public class RedCivilian : Civilian, IInteractable, ICanMove
@@ -12,11 +13,14 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
     [SerializeField] float moveSpeed = 3f;
     private bool facingRight = false;
     private Vector3 localScale;
-
+    GameObject player;
+    [SerializeField] float knockbackForce = 10f;
+    bool alive = true;
 
     // Start is called before the first frame update
     void Start()
     {
+        player = GameObject.Find("Player");
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
     }
@@ -29,6 +33,8 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
         ParticleEffect particleEffect = particle.GetComponent<ParticleEffect>();
         particleEffect.SetColor(GetComponent<SpriteRenderer>().color);
         FadeColor();
+
+
     }
 
     public void ShowInteractionPrompt()
@@ -76,7 +82,13 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
 
     public void Move()
     {
-        rb.velocity = new Vector2(dirX * moveSpeed, rb.velocity.y);
+        //if player is within 5 units of the civilian, move towards the player
+        if (Vector2.Distance(transform.position, player.transform.position) < 10)
+        {
+            //move towards the player
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+
+        }
     }
 
     public void Flip()
@@ -91,5 +103,21 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
     public void DisableMovement() // Implementing DisableMovement method from ICanMove
     {
         moveSpeed = 0;
+    }
+
+    void OnCollisionEnter2D(Collision2D col)
+    {
+        if (!alive) return;
+
+        if (col.gameObject.tag.Equals("Player"))
+        {
+            //set the player's velocity to 0
+            col.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            //apply a knockback force to the player opposite to the direction of the collision
+            Vector2 refrence = col.gameObject.transform.position - transform.position;
+            //apply in the direction of refrence
+            col.gameObject.GetComponent<Rigidbody2D>().AddForce(refrence.normalized * knockbackForce, ForceMode2D.Impulse);
+
+        }
     }
 }
