@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using UnityEngine;
 
@@ -30,7 +31,7 @@ public class ParticleEffect : MonoBehaviour
             transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, step);
 
             // Check if the particle has reached the player (or is very close)
-            if (distanceToPlayer < 0.001f)
+            if (distanceToPlayer < 0.25f)
             {
                 hasReachedPlayer = true;
             }
@@ -38,8 +39,12 @@ public class ParticleEffect : MonoBehaviour
             yield return null; // Wait for the next frame before continuing the loop
         }
 
-        // Wait for 0.5 seconds after reaching the player
-        yield return new WaitForSeconds(0.5f);
+        //has reached the player, keep following but only for hal a second
+        for(float i = 0; i < 0.5f; i += Time.deltaTime)
+        {
+            transform.position = playerTransform.position;
+            yield return null;
+        }
 
         // Destroy the particle effect
         Destroy(gameObject);

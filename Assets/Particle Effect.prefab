@@ -4827,3 +4827,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerTransform: {fileID: 0}
   speed: 2
+  accelerationFactor: 0.75
