@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using System.ComponentModel;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,6 +12,8 @@ public class PlayerController : MonoBehaviour
     public bool faceRight;
     public TextMeshProUGUI interactText;
     private IInteractable interactableInRange;
+    bool canDoubleJump = true;
+    int doubleJump = 0;
 
     void Start()
     {
@@ -57,8 +60,31 @@ public class PlayerController : MonoBehaviour
         bool canJump = Physics2D.OverlapArea(platTest1.transform.position, platTest2.transform.position) != null;
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
-            rb2d.AddForce(new Vector3(0, jump));
+            //make a raycast down
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f);
+            if (hit.collider != null)
+            {
+                if (hit.collider.gameObject.tag == "Platform")
+                {
+                    rb2d.AddForce(new Vector3(0, jump));
+                    canDoubleJump = true;
+                    doubleJump = 0;
+                }
+            }
+            else
+            {
+                doubleJump++;
+                if (doubleJump >= 2)
+                {
+                  canDoubleJump = false;
+                }
+                else
+                {
+                    rb2d.AddForce(new Vector3(0, jump));
+                }
+            }
         }
+
     }
 
     private void HandleInteraction()
