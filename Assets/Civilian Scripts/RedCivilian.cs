@@ -11,6 +11,8 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
     public GameObject ParticlePrefab;
     private float dirX = -1f;
     [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float attackDistance = 5f;
+    bool isChasingPlayer = false;
     private bool facingRight = false;
     private Vector3 localScale;
     GameObject player;
@@ -33,7 +35,7 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
         ParticleEffect particleEffect = particle.GetComponent<ParticleEffect>();
         particleEffect.SetColor(GetComponent<SpriteRenderer>().color);
         FadeColor();
-
+        alive = false;
 
     }
 
@@ -83,11 +85,15 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
     public void Move()
     {
         //if player is within 5 units of the civilian, move towards the player
-        if (Vector2.Distance(transform.position, player.transform.position) < 10)
+        if (Vector2.Distance(transform.position, player.transform.position) < attackDistance)
         {
-            //move towards the player
-            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
+            isChasingPlayer = true;
+     
+        }
 
+        if(isChasingPlayer)
+        {
+            transform.position = Vector2.MoveTowards(transform.position, player.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 
