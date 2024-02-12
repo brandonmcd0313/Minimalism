@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public bool faceRight;
     public TextMeshProUGUI interactText;
     private IInteractable interactableInRange;
-    bool canDoubleJump = true;
+    public bool canDoubleJump = true;
     int doubleJump = 0;
 
     void Start()
@@ -61,7 +61,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space) && canJump)
         {
             //make a raycast down
-            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f);
+            RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 2f);
             if (hit.collider != null)
             {
                 if (hit.collider.gameObject.tag == "Platform" || hit.collider.gameObject.tag == "Person" || hit.collider.gameObject.tag == "Soul")
