@@ -77,7 +77,7 @@ GameObject:
   - component: {fileID: 7384242095092899844}
   m_Layer: 0
   m_Name: Red Civilian
-  m_TagString: Untagged
+  m_TagString: Person
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

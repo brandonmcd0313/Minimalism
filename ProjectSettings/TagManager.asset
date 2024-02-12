@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - Soul
+  - Person
   layers:
   - Default
   - TransparentFX
@@ -45,4 +46,7 @@ TagManager:
     locked: 0
   - name: Particles
     uniqueID: 3306621989
+    locked: 0
+  - name: Canvas
+    uniqueID: 800111147
     locked: 0

@@ -64,7 +64,7 @@ public class PlayerController : MonoBehaviour
             RaycastHit2D hit = Physics2D.Raycast(transform.position, Vector2.down, 1.5f);
             if (hit.collider != null)
             {
-                if (hit.collider.gameObject.tag == "Platform")
+                if (hit.collider.gameObject.tag == "Platform" || hit.collider.gameObject.tag == "Person" || hit.collider.gameObject.tag == "Soul")
                 {
                     rb2d.AddForce(new Vector3(0, jump));
                     canDoubleJump = true;
