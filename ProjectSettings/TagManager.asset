@@ -7,6 +7,7 @@ TagManager:
   - Platform
   - Soul
   - Person
+  - Pollito
   layers:
   - Default
   - TransparentFX

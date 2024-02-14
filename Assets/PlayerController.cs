@@ -1,7 +1,9 @@
-﻿using System.ComponentModel;
+﻿using System.Collections;
+using System.ComponentModel;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -14,6 +16,8 @@ public class PlayerController : MonoBehaviour
     private IInteractable interactableInRange;
     public bool canDoubleJump = true;
     int doubleJump = 0;
+    public GameObject background;
+    public bool canMove = true; 
 
     void Start()
     {
@@ -23,10 +27,16 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-
-        HandleMovement();
-        HandleJump();
-        HandleInteraction();
+        if (canMove)
+        {
+            HandleMovement();
+            HandleJump();
+            HandleInteraction();
+        }
+        if(Input.GetKeyDown(KeyCode.R))
+        {
+            transform.position = new Vector3(450, 190, 0);
+        }
     }
 
 
@@ -115,6 +125,34 @@ public class PlayerController : MonoBehaviour
                 interactText.gameObject.transform.position = Camera.main.WorldToScreenPoint(collision.transform.position + new Vector3(0, 2.0f, 0));
             }
             */
+        }
+
+        if(collision.tag == "Pollito")
+        {
+            //turn off player movement
+            canMove = false;
+
+            //Kill all player movement
+            rb2d.velocity = Vector2.zero;
+
+            StartCoroutine(Pollito());
+            //Hex Code for new Camera Background color: 73706D
+
+
+            //Change the background to pollitoBackground
+            background.gameObject.SetActive(false);
+        }
+    }
+
+    IEnumerator Pollito()
+    {
+        yield return null;
+        while (transform.position != new Vector3(485, 189.8448f, 0) || Camera.main.orthographicSize != 15) {
+            //Gradually move player to 480 189.8448 using moveTowards
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(485, 189.8448f, 0), 0.1f);
+
+            //gradually zoom camera to orthographic size 10
+            Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, 15, 0.1f);
         }
     }
 
