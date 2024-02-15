@@ -6,7 +6,8 @@ public class PurpleCivilian : Civilian, IInteractable
 {
     private Rigidbody2D rb;
     public GameObject ParticlePrefab;
-    [SerializeField] float knockbackForce = 10f;
+    public string[] PromptTexts;
+    public string[] DeathTexts;
     bool hasBeenApproached = false;
     
 
@@ -29,7 +30,7 @@ public class PurpleCivilian : Civilian, IInteractable
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        TextController.Instance.ShowTextBox(new string[] { "You will regert this!" });
+        TextController.Instance.ShowTextBox(DeathTexts);
     }
 
     public void ShowInteractionPrompt()
@@ -39,7 +40,7 @@ public class PurpleCivilian : Civilian, IInteractable
         {
             hasBeenApproached = true;
             //show the interaction prompt
-            TextController.Instance.ShowTextBox(new string[] { "I am about to purple...", "OOOHOHHOOH!! I am purpling all over the place." });
+            TextController.Instance.ShowTextBox(PromptTexts);
         }
     }
 
