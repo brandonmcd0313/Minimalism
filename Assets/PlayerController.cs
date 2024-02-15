@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
     public GameObject background, textBoxBack;
     public TextMeshProUGUI textBox;
     public bool canMove = true;
-    public Sprite playerBox, pollitoBox;
+    public Sprite playerBox, pollitoBox, purpleBox;
     //fonts for tmpro
     public TMP_FontAsset regFont, pollitoFont;
     string[] pollitoText = { "MY CHILD, IT IS I... POLLITO...", "YOU ARE A CLUCKING MENACE TO SOCIETY", "BOOM, EXPLOSION, YOU DEAD"};
@@ -121,6 +121,12 @@ public class PlayerController : MonoBehaviour
         // Proceed only if an IInteractable component is found
         if (interactable != null)
         {
+            if(collision.GetComponent<PurpleCivilian>())
+            {
+                textBox.font = pollitoFont;
+                textBoxBack.GetComponent<SpriteRenderer>().sprite = purpleBox;
+                TextController.Instance.ShowTextBox(new string[] { "You shouldn't have done that..." });
+            }
             interactableInRange = interactable; // Set the current interactable object
             interactableInRange.ShowInteractionPrompt(); // Show interaction prompt
 
