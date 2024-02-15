@@ -22,6 +22,8 @@ public class PlayerController : MonoBehaviour
     public Sprite playerBox, pollitoBox;
     //fonts for tmpro
     public TMP_FontAsset regFont, pollitoFont;
+    public Button closeButton;
+    string[] pollitoText = { "MY CHILD, IT IS I... POLLITO...", "YOU ARE A CLUCKING MENACE TO SOCIETY", "BOOM, EXPLOSION, YOU DEAD"};
 
     void Start()
     {
@@ -65,8 +67,15 @@ public class PlayerController : MonoBehaviour
 
     public void HideText()
     {
-        textBoxBack.SetActive(false);
-        canMove = true;
+        if (closeButton.GetComponentInChildren<TextMeshProUGUI>().text == "Close") {
+            textBoxBack.SetActive(false);
+            canMove = true;
+        }
+        else
+        {
+            Speak(pollitoText[1], pollitoBox);
+            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Close";
+        }
     }
 
     public void Speak(string words, Sprite textBack)
@@ -78,6 +87,7 @@ public class PlayerController : MonoBehaviour
             textBox.color = Color.black;
             textBox.font = pollitoFont;
             textBoxBack.transform.localScale = new Vector3(40f, 40f, 40f);
+            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
         }
         else
         {
