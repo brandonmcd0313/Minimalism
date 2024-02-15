@@ -22,13 +22,13 @@ public class PlayerController : MonoBehaviour
     public Sprite playerBox, pollitoBox;
     //fonts for tmpro
     public TMP_FontAsset regFont, pollitoFont;
-    public Button closeButton;
     string[] pollitoText = { "MY CHILD, IT IS I... POLLITO...", "YOU ARE A CLUCKING MENACE TO SOCIETY", "BOOM, EXPLOSION, YOU DEAD"};
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         faceRight = true;
+        TextController.Instance.ShowTextBox(new string[] { "This color... The world is too noisey! I must minimalize this chaos...\n\t\t[SPACE] " });
     }
 
     void Update()
@@ -65,58 +65,6 @@ public class PlayerController : MonoBehaviour
         rb2d.velocity = new Vector2(Mathf.Clamp(rb2d.velocity.x, -10f, 10f), rb2d.velocity.y);
 
        
-    }
-
-    public void HideText()
-    {
-        if (closeButton.GetComponentInChildren<TextMeshProUGUI>().text == "CLOSE") {
-            textBoxBack.SetActive(false);
-            canMove = true;
-        }
-        else
-        {
-            Speak(pollitoText[1], pollitoBox);
-            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "CLOSE";
-        }
-    }
-
-    public void Speak(string words, Sprite textBack)
-    {
-        textBoxBack.gameObject.SetActive(true);
-        textBox.text = "";
-        if (textBack == pollitoBox)
-        {
-            textBox.color = Color.black;
-            textBox.font = pollitoFont;
-            textBoxBack.transform.localScale = new Vector3(40f, 40f, 40f);
-            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "NEXT";
-        }
-        else
-        {
-            textBox.color = Color.white;
-            textBox.font = regFont;
-            textBoxBack.transform.localScale = new Vector3(60f, 60f, 60f);
-        }
-
-        textBoxBack.GetComponent<SpriteRenderer>().sprite = textBack;
-
-        //turn off player movement and kill all player movement
-        canMove = false;
-        rb2d.velocity = Vector2.zero;
-
-
-        //text scrolling effect
-        StartCoroutine(ScrollText(words));
-    }
-
-    IEnumerator ScrollText(string words)
-    {
-        textBox.text = "";
-        foreach (char letter in words.ToCharArray())
-        {
-            textBox.text += letter;
-            yield return new WaitForSeconds(0.05f);
-        }
     }
 
     private void Flip()
@@ -214,7 +162,12 @@ public class PlayerController : MonoBehaviour
             Camera.main.orthographicSize = Mathf.MoveTowards(Camera.main.orthographicSize, 15, 0.1f);
             yield return new WaitForSeconds(0.05f);
         }
-        Speak("MY CHILD, IT IS I... POLLITO...", pollitoBox);
+        textBox.color = Color.black;
+        textBox.font = pollitoFont;
+        textBox.fontSize = 46;
+        textBoxBack.transform.localScale = new Vector3(50f, 50f, 50f);
+        textBoxBack.GetComponent<SpriteRenderer>().sprite = pollitoBox;
+        TextController.Instance.ShowTextBox(new string[] { "MY CHILD, IT IS I... POLLITO..." });
     }
 
 
