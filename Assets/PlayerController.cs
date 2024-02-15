@@ -67,14 +67,14 @@ public class PlayerController : MonoBehaviour
 
     public void HideText()
     {
-        if (closeButton.GetComponentInChildren<TextMeshProUGUI>().text == "Close") {
+        if (closeButton.GetComponentInChildren<TextMeshProUGUI>().text == "CLOSE") {
             textBoxBack.SetActive(false);
             canMove = true;
         }
         else
         {
             Speak(pollitoText[1], pollitoBox);
-            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Close";
+            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "CLOSE";
         }
     }
 
@@ -87,7 +87,7 @@ public class PlayerController : MonoBehaviour
             textBox.color = Color.black;
             textBox.font = pollitoFont;
             textBoxBack.transform.localScale = new Vector3(40f, 40f, 40f);
-            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "Next";
+            closeButton.GetComponentInChildren<TextMeshProUGUI>().text = "NEXT";
         }
         else
         {
