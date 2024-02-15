@@ -31,6 +31,8 @@ public class TextController : MonoBehaviour
         //enable the canvas and text box
         Canvas.SetActive(true);
         TextBox.SetActive(true);
+
+
         //start the coroutine to display the text
         StartCoroutine(DisplayText(texts));
     }
