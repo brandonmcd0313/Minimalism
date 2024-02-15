@@ -19,16 +19,14 @@ public class PlayerController : MonoBehaviour
     public GameObject background, textBoxBack;
     public TextMeshProUGUI textBox;
     public bool canMove = true;
-    public Sprite playerBox, pollitoBox, purpleBox;
-    //fonts for tmpro
-    public TMP_FontAsset regFont, pollitoFont;
+   
     string[] pollitoText = { "MY CHILD, IT IS I... POLLITO...", "YOU ARE A CLUCKING MENACE TO SOCIETY", "BOOM, EXPLOSION, YOU DEAD"};
 
     void Start()
     {
         rb2d = GetComponent<Rigidbody2D>();
         faceRight = true;
-        TextController.Instance.ShowTextBox(new string[] { "This color... The world is too noisey! I must minimalize this chaos...\n\t\t[SPACE] " });
+        TextController.Instance.ShowTextBox(new string[] { "This color... The world is too noisey! I must minimalize this chaos...\n\t\t[SPACE] " }, TextController.TextType.Player);
     }
 
     void Update()
@@ -121,12 +119,7 @@ public class PlayerController : MonoBehaviour
         // Proceed only if an IInteractable component is found
         if (interactable != null)
         {
-            if(collision.GetComponent<PurpleCivilian>())
-            {
-                textBox.font = pollitoFont;
-                textBoxBack.GetComponent<SpriteRenderer>().sprite = purpleBox;
-                TextController.Instance.ShowTextBox(new string[] { "You shouldn't have done that..." });
-            }
+           
             interactableInRange = interactable; // Set the current interactable object
             interactableInRange.ShowInteractionPrompt(); // Show interaction prompt
 
@@ -151,7 +144,6 @@ public class PlayerController : MonoBehaviour
 
             
 
-
             //Change the background to pollitoBackground
             background.gameObject.SetActive(false);
             StartCoroutine(Pollito());        
@@ -169,11 +161,8 @@ public class PlayerController : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
         }
         textBox.color = Color.black;
-        textBox.font = pollitoFont;
-        textBox.fontSize = 46;
         textBoxBack.transform.localScale = new Vector3(50f, 50f, 50f);
-        textBoxBack.GetComponent<SpriteRenderer>().sprite = pollitoBox;
-        TextController.Instance.ShowTextBox(new string[] { "MY CHILD, IT IS I... POLLITO..." });
+        TextController.Instance.ShowTextBox(new string[] { "MY CHILD, IT IS I... POLLITO..." }, TextController.TextType.Pollito);
     }
 
 

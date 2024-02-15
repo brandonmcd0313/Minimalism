@@ -12,6 +12,17 @@ public class TextController : MonoBehaviour
     public static TextController Instance;
     public GameObject player;
 
+    public GameObject playerBox, pollitoBox, purpleBox;
+    public GameObject playerText, pollitoText, purpleText;
+
+    GameObject currentBox;
+    GameObject currentText;
+    public enum TextType
+    {
+        Player,
+        Pollito,
+        Purple
+    }
     private void Awake()
     {
         Instance = this;
@@ -26,12 +37,33 @@ public class TextController : MonoBehaviour
       
     }
 
-    public void ShowTextBox(string[] texts)
+    public void ShowTextBox(string[] texts, TextType type)
     {
-        //enable the canvas and text box
-        Canvas.SetActive(true);
-        TextBox.SetActive(true);
+       
 
+        switch (type)
+        {
+            case TextType.Player:
+                currentBox = playerBox;
+                currentText = playerText;
+                break;
+            case TextType.Pollito:
+                currentBox = pollitoBox;
+                currentText = pollitoText;
+                break;
+            case TextType.Purple:
+                currentBox = purpleBox;
+                currentText = purpleText;
+                break;
+        }   
+
+        Canvas.SetActive(true);
+        //disable all text boxes
+        playerBox.SetActive(false);
+        pollitoBox.SetActive(false);
+        purpleBox.SetActive(false);
+        //enable the current text box
+        currentBox.SetActive(true);
 
         //start the coroutine to display the text
         StartCoroutine(DisplayText(texts));
@@ -54,7 +86,7 @@ public class TextController : MonoBehaviour
         }
         //disable the canvas and text box
         Canvas.SetActive(false);
-        TextBox.SetActive(false);
+        currentBox.SetActive(false);
         //enable player movement
         player.GetComponent<PlayerController>().canMove = true;
     }

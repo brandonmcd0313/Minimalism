@@ -30,7 +30,7 @@ public class PurpleCivilian : Civilian, IInteractable
         rb.constraints = RigidbodyConstraints2D.None;
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
-        TextController.Instance.ShowTextBox(DeathTexts);
+        TextController.Instance.ShowTextBox(DeathTexts, TextController.TextType.Purple);
     }
 
     public void ShowInteractionPrompt()
@@ -40,7 +40,7 @@ public class PurpleCivilian : Civilian, IInteractable
         {
             hasBeenApproached = true;
             //show the interaction prompt
-            TextController.Instance.ShowTextBox(PromptTexts);
+            TextController.Instance.ShowTextBox(PromptTexts, TextController.TextType.Purple);
         }
     }
 
