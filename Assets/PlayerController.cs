@@ -31,12 +31,14 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (canMove)
+        if (!canMove)
         {
+            return;
+        }
             HandleMovement();
             HandleJump();
             HandleInteraction();
-        }
+        
         if(Input.GetKeyDown(KeyCode.R))
         {
             transform.position = new Vector3(450, 190, 0);
