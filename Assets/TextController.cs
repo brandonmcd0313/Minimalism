@@ -74,6 +74,8 @@ public class TextController : MonoBehaviour
     {
         //disable player movement
         player.GetComponent<PlayerController>().canMove = false;
+        //set time scale to 0 to pause the game
+        Time.timeScale = 0;
         for (int i = 0; i < texts.Length; i++)
         {
             for(int j = 0; j <= texts[i].Length; j++)
@@ -89,5 +91,7 @@ public class TextController : MonoBehaviour
         currentBox.SetActive(false);
         //enable player movement
         player.GetComponent<PlayerController>().canMove = true;
+        //set time scale back to 1 to resume the game
+        Time.timeScale = 1;
     }
 }
