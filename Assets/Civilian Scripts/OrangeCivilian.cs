@@ -12,12 +12,14 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
     private bool facingRight = false;
     private Vector3 localScale;
     bool alive = true;
+    private GameObject player;
 
     // Start is called before the first frame update
     void Start()
     {
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player");
     }
 
     public void Interact()
@@ -34,7 +36,11 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
 
     public void ShowInteractionPrompt()
     {
-        Debug.Log("Show interaction prompt");
+        if (!player.GetComponent<PlayerController>().seeOrange)
+        {
+            player.GetComponent<PlayerController>().seeOrange = true;
+            TextController.Instance.ShowTextBox(new string[] { "This orange fella... He is too slothful, I must fix this... " }, TextController.TextType.Player);
+        }
     }
 
     public void HideInteractionPrompt()
