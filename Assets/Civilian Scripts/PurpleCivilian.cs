@@ -9,7 +9,7 @@ public class PurpleCivilian : Civilian, IInteractable
     public string[] PromptTexts;
     public string[] DeathTexts;
     bool hasBeenApproached = false;
-    
+    bool alive = true;
 
 
     // Start is called before the first frame update
@@ -20,6 +20,7 @@ public class PurpleCivilian : Civilian, IInteractable
 
     public void Interact()
     {
+        if (!alive) return;
         //spawn particle and set its color to the civilian's original color
         GameObject particle = Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
         ParticleEffect particleEffect = particle.GetComponent<ParticleEffect>();
@@ -31,6 +32,7 @@ public class PurpleCivilian : Civilian, IInteractable
         rb.constraints = RigidbodyConstraints2D.FreezeRotation;
 
         TextController.Instance.ShowTextBox(DeathTexts, TextController.TextType.Purple);
+        alive = false;
     }
 
     public void ShowInteractionPrompt()

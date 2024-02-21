@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 //Orange = Basic (walks back and forth)
 public class OrangeCivilian : Civilian, IInteractable, ICanMove
@@ -10,7 +11,7 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
     [SerializeField] float moveSpeed = 3f;
     private bool facingRight = false;
     private Vector3 localScale;
-
+    bool alive = true;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +22,14 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
 
     public void Interact()
     {
+        if (!alive) return;
         DisableMovement();
         //spawn particle and set its color to the civilian's original color
         GameObject particle = Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
         ParticleEffect particleEffect = particle.GetComponent<ParticleEffect>();
         particleEffect.SetColor(GetComponent<SpriteRenderer>().color);
         FadeColor();
+        alive = false;
     }
 
     public void ShowInteractionPrompt()

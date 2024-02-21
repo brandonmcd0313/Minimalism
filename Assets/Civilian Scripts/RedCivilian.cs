@@ -29,6 +29,7 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
 
     public void Interact()
     {
+        if (alive) return;
         DisableMovement();
         //spawn particle and set its color to the civilian's original color
         GameObject particle = Instantiate(ParticlePrefab, transform.position, Quaternion.identity);

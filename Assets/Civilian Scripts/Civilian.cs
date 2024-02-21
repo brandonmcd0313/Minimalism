@@ -8,6 +8,7 @@ public abstract class Civilian : MonoBehaviour
 {
 
     bool isInteractable = true;
+    bool isAlive = true;
 
     protected virtual void FadeColor()
     {
@@ -15,8 +16,9 @@ public abstract class Civilian : MonoBehaviour
         {
             return;
         }
-        isInteractable = false;
 
+        isInteractable = false;
+        isAlive = false;
         Debug.Log("Interacting with civilian");
 
         //change the color of the civilian to be gray

@@ -19,6 +19,7 @@ public class BlueCivilian : Civilian, IInteractable
 
     public void Interact()
     {
+        if (!alive) return;
         //spawn particle and set its color to the civilian's original color
         GameObject particle = Instantiate(ParticlePrefab, transform.position, Quaternion.identity);
         ParticleEffect particleEffect = particle.GetComponent<ParticleEffect>();
