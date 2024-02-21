@@ -7,7 +7,7 @@ public class PurpleCivilian : Civilian, IInteractable
     private Rigidbody2D rb;
     public GameObject ParticlePrefab;
     public string[] PromptTexts;
-    public string[] DeathTexts = { "You will regret this..." };
+    public string[] DeathTexts;
     bool hasBeenApproached = false;
     
 

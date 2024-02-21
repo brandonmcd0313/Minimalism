@@ -815,7 +815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &83601344
 Transform:
   m_ObjectHideFlags: 0
@@ -3893,7 +3893,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: POLLITO GOT A GLOCK IN THE RARI. He work that dance flow.
+  m_text: You are a clucking menance to society
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 5ddea0a7441d1214cacc9c5cc5225450, type: 2}
   m_sharedMaterial: {fileID: -6565694573737879686, guid: 5ddea0a7441d1214cacc9c5cc5225450, type: 2}
@@ -3930,7 +3930,7 @@ MonoBehaviour:
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 256
   m_textAlignment: 65535
-  m_characterSpacing: 0
+  m_characterSpacing: 22.5
   m_wordSpacing: 0
   m_lineSpacing: 0
   m_lineSpacingMax: 0
@@ -7244,7 +7244,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Player Text Box '
+  m_text: I AM BECOME DEATH, DESTROYER OF WORLDS
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 845d43b3175f3ca4ca83ff24910415aa, type: 2}
   m_sharedMaterial: {fileID: 1176071924002728062, guid: 845d43b3175f3ca4ca83ff24910415aa, type: 2}
@@ -7510,7 +7510,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: I purple all over da place
+  m_text: I AM YOUR PURPLE OVERLORD, BOW BEFORE ME!!!!!
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 845d43b3175f3ca4ca83ff24910415aa, type: 2}
   m_sharedMaterial: {fileID: 1176071924002728062, guid: 845d43b3175f3ca4ca83ff24910415aa, type: 2}
@@ -8892,6 +8892,22 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6520909116647447983, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
+      propertyPath: DeathTexts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520909116647447983, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
+      propertyPath: PromptTexts.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520909116647447983, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
+      propertyPath: DeathTexts.Array.data[0]
+      value: 'YOU GAY MOTHER- '
+      objectReference: {fileID: 0}
+    - target: {fileID: 6520909116647447983, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
+      propertyPath: PromptTexts.Array.data[0]
+      value: 'You are ugly '
+      objectReference: {fileID: 0}
     - target: {fileID: 6520909116647447984, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
       propertyPath: m_RootOrder
       value: 2
@@ -18635,99 +18651,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b185b555b2f6ad4aa74040de8e90f56, type: 3}
---- !u!1001 &2089422945
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 2869795740332401025, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_Name
-      value: TextController
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 415.6097
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 181.40935
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -9.93716
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5523594300669724526, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: Canvas
-      value: 
-      objectReference: {fileID: 1436197462}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: player
-      value: 
-      objectReference: {fileID: 1821874003}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: TextBox
-      value: 
-      objectReference: {fileID: 837643050}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: playerBox
-      value: 
-      objectReference: {fileID: 83601343}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: purpleBox
-      value: 
-      objectReference: {fileID: 1434284852}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: playerText
-      value: 
-      objectReference: {fileID: 837643050}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: pollitoBox
-      value: 
-      objectReference: {fileID: 658473055}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: purpleText
-      value: 
-      objectReference: {fileID: 841403400}
-    - target: {fileID: 8440419745751510790, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
-      propertyPath: pollitoText
-      value: 
-      objectReference: {fileID: 473786318}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 662ea241cf648f243a2ece3bd9b8b30b, type: 3}
 --- !u!1 &2105926739
 GameObject:
   m_ObjectHideFlags: 0
@@ -19008,3 +18931,54 @@ Transform:
   m_Father: {fileID: 925336503}
   m_RootOrder: 31
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
+--- !u!1 &2869795739200598496
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5523594300190922511}
+  - component: {fileID: 8440419746884370279}
+  m_Layer: 0
+  m_Name: TextController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5523594300190922511
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869795739200598496}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 415.6097, y: 181.40935, z: -9.93716}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8440419746884370279
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2869795739200598496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 537d15ef71b55794ab3a69e0cacfb978, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 1821874003}
+  playerBox: {fileID: 83601343}
+  pollitoBox: {fileID: 658473055}
+  purpleBox: {fileID: 1434284852}
+  playerText: {fileID: 837643050}
+  pollitoText: {fileID: 473786318}
+  purpleText: {fileID: 841403400}

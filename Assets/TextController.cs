@@ -8,8 +8,7 @@ public class TextController : MonoBehaviour
 {
     //All text is sent through this script
 
-   public GameObject Canvas;
-   public GameObject TextBox;
+ 
     public static TextController Instance;
     public GameObject player;
 
@@ -32,10 +31,11 @@ public class TextController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       //disable the canvas and text box
-       Canvas.SetActive(false);
-        TextBox.SetActive(false);
-      
+        //disable the canvas and text box
+        playerBox.SetActive(false);
+        pollitoBox.SetActive(false);
+        purpleBox.SetActive(false);
+
     }
 
     public void ShowTextBox(string[] texts, TextType type)
@@ -48,27 +48,23 @@ public class TextController : MonoBehaviour
                 Debug.Log("HIT");
                 currentBox = playerBox;
                 currentText = playerText;
-                playerText.GetComponent<TextMeshProUGUI>().color = Color.white;
                 break;
             case TextType.Pollito:
                 currentBox = pollitoBox;
                 currentText = pollitoText;
-                pollitoText.GetComponent<TextMeshProUGUI>().color = Color.black;
                 break;
             case TextType.Purple:
                 currentBox = purpleBox;
                 currentText = purpleText;
-                purpleText.GetComponent<TextMeshProUGUI>().color = Color.white;
                 break;
         }   
-
-        Canvas.SetActive(true);
         //disable all text boxes
         playerBox.SetActive(false);
         pollitoBox.SetActive(false);
         purpleBox.SetActive(false);
         //enable the current text box
         currentBox.SetActive(true);
+        currentText.SetActive(true);
 
         //start the coroutine to display the text
         StartCoroutine(DisplayText(texts));
@@ -80,17 +76,16 @@ public class TextController : MonoBehaviour
         player.GetComponent<PlayerController>().canMove = false;
         for (int i = 0; i < texts.Length; i++)
         {
-            for(int j = 0; j < texts[i].Length; j++)
+            for(int j = 0; j <= texts[i].Length; j++)
             {
                 //display the text one character at a time
-                TextBox.GetComponent<TextMeshProUGUI>().text = texts[i].Substring(0, j);
+                currentText.GetComponent<TextMeshProUGUI>().text = texts[i].Substring(0, j);
+                Debug.Log(texts[i]);
                 yield return new WaitForSeconds(0.05f);
             }
            //wait until the player presses the space key
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         }
-        //disable the canvas and text box
-        Canvas.SetActive(false);
         currentBox.SetActive(false);
         //enable player movement
         player.GetComponent<PlayerController>().canMove = true;
