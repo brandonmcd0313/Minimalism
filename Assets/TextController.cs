@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -44,16 +45,20 @@ public class TextController : MonoBehaviour
         switch (type)
         {
             case TextType.Player:
+                Debug.Log("HIT");
                 currentBox = playerBox;
                 currentText = playerText;
+                playerText.GetComponent<TextMeshProUGUI>().color = Color.white;
                 break;
             case TextType.Pollito:
                 currentBox = pollitoBox;
                 currentText = pollitoText;
+                pollitoText.GetComponent<TextMeshProUGUI>().color = Color.black;
                 break;
             case TextType.Purple:
                 currentBox = purpleBox;
                 currentText = purpleText;
+                purpleText.GetComponent<TextMeshProUGUI>().color = Color.white;
                 break;
         }   
 
