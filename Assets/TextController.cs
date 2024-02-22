@@ -8,7 +8,7 @@ public class TextController : MonoBehaviour
 {
     //All text is sent through this script
 
- 
+
     public static TextController Instance;
     public GameObject player;
 
@@ -40,7 +40,7 @@ public class TextController : MonoBehaviour
 
     public void ShowTextBox(string[] texts, TextType type)
     {
-       
+
 
         switch (type)
         {
@@ -56,7 +56,7 @@ public class TextController : MonoBehaviour
                 currentBox = purpleBox;
                 currentText = purpleText;
                 break;
-        }   
+        }
         //disable all text boxes
         playerBox.SetActive(false);
         pollitoBox.SetActive(false);
@@ -71,24 +71,49 @@ public class TextController : MonoBehaviour
 
     IEnumerator DisplayText(string[] texts)
     {
+        //disable all movement
+        //find every object implementing ICanMove
+        ToggleMovement(false);
         //disable player movement
         player.GetComponent<PlayerController>().canMove = false;
         for (int i = 0; i < texts.Length; i++)
         {
-            for(int j = 0; j <= texts[i].Length; j++)
+            for (int j = 0; j <= texts[i].Length; j++)
             {
                 //display the text one character at a time
                 currentText.GetComponent<TextMeshProUGUI>().text = texts[i].Substring(0, j);
                 Debug.Log(texts[i]);
                 yield return new WaitForSeconds(0.05f);
             }
-           //wait until the player presses the space key
+            //wait until the player presses the space key
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         }
         currentBox.SetActive(false);
         //enable player movement
         player.GetComponent<PlayerController>().canMove = true;
-        //set time scale back to 1 to resume the game
-        Time.timeScale = 1;
+        ToggleMovement(true);
+    }
+
+    // Method to find all GameObjects implementing ICanMove and toggle their movement
+    public void ToggleMovement(bool enable)
+    {
+        // Find all GameObjects in the scene
+        foreach (GameObject obj in GameObject.FindObjectsOfType(typeof(GameObject)))
+        {
+            // Check if the GameObject has a component that implements ICanMove
+            ICanMove movable = obj.GetComponent<ICanMove>();
+            if (movable != null)
+            {
+                // If the bool is true, enable movement, otherwise disable movement
+                if (enable)
+                {
+                    movable.EnableMovement();
+                }
+                else
+                {
+                    movable.DisableMovement();
+                }
+            }
+        }
     }
 }

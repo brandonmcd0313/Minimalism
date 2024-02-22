@@ -7,7 +7,8 @@ public class YellowCivilian : Civilian, IInteractable, ICanMove
     private Rigidbody2D rb;
     public GameObject ParticlePrefab;
     private float dirX = -1f;
-    [SerializeField] float moveSpeed = 3f;
+    [SerializeField] float moveSpeed;
+    float moveSpeedStorage;
     bool isFleeingPlayer = false;
     [SerializeField] float attackDistance = 5f;
     private bool facingRight = false;
@@ -21,6 +22,7 @@ public class YellowCivilian : Civilian, IInteractable, ICanMove
         player = GameObject.Find("Player");
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
+        moveSpeedStorage = moveSpeed;
     }
 
     public void Interact()
@@ -83,5 +85,10 @@ public class YellowCivilian : Civilian, IInteractable, ICanMove
     public void DisableMovement() // Implementing DisableMovement method from ICanMove
     {
         moveSpeed = 0;
+    }
+
+    public void EnableMovement() // Implementing EnableMovement method from ICanMove
+    {
+       moveSpeed = moveSpeedStorage;
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ICanMove
 {
     Rigidbody2D rb2d;
     public float speed = 15;
@@ -35,14 +35,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
-        {
-            return;
-        }
-            HandleMovement();
-            HandleJump();
-            HandleInteraction();
-        
+        Move();
         if(Input.GetKeyDown(KeyCode.R))
         {
             transform.position = new Vector3(450, 190, 0);
@@ -169,4 +162,50 @@ public class PlayerController : MonoBehaviour
         TextController.Instance.ShowTextBox(new string[] { "MY CHILD, IT IS I... POLLITO..." }, TextController.TextType.Pollito);
     }
 
+
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        // Check the collided object and its parent for the IInteractable component
+        IInteractable interactable = collision.GetComponent<IInteractable>() ?? collision.transform.parent.GetComponent<IInteractable>();
+
+        // Proceed only if an IInteractable component is found and matches interactableInRange
+        if (interactable != null && interactableInRange == interactable)
+        {
+            interactableInRange.HideInteractionPrompt(); // Hide interaction prompt
+            interactableInRange = null; // Clear the current interactable object
+
+            // Deactivate the interaction text UI, if it exists and is assigned
+            if (interactText != null)
+            {
+                interactText.gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void Move()
+    {
+        if (!canMove)
+        {
+            return;
+        }
+        HandleMovement();
+        HandleJump();
+        HandleInteraction();
+    }
+
+    void ICanMove.Flip()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
 }

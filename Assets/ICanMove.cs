@@ -7,4 +7,6 @@ public interface ICanMove
     public void Move();
     public void Flip();
     public void DisableMovement();
+
+    public void EnableMovement();
 }
