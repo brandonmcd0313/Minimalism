@@ -45,7 +45,6 @@ public class TextController : MonoBehaviour
         switch (type)
         {
             case TextType.Player:
-                Debug.Log("HIT");
                 currentBox = playerBox;
                 currentText = playerText;
                 break;
@@ -75,6 +74,8 @@ public class TextController : MonoBehaviour
         //disable all movement
         //find every object implementing ICanMove
         ToggleMovement(false);
+        //disable player movement
+        player.GetComponent<PlayerController>().canMove = false;
         for (int i = 0; i < texts.Length; i++)
         {
             for (int j = 0; j <= texts[i].Length; j++)

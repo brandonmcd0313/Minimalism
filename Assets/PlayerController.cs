@@ -12,13 +12,17 @@ public class PlayerController : MonoBehaviour, ICanMove
     public float jump = 400;
     public GameObject platTest1, platTest2;
     public bool faceRight;
-    public TextMeshProUGUI interactText;
     private IInteractable interactableInRange;
     public bool canDoubleJump = true;
     int doubleJump = 0;
     public GameObject background, textBoxBack;
     public TextMeshProUGUI textBox;
     public bool canMove = true;
+    public bool seeOrange = false;
+    public bool seePurple = false;
+    public bool seeBlue = false;
+    public bool seeRed = false;
+    public bool seeYellow = false;
    
     string[] pollitoText = { "MY CHILD, IT IS I... POLLITO...", "YOU ARE A CLUCKING MENACE TO SOCIETY", "BOOM, EXPLOSION, YOU DEAD"};
 
@@ -106,13 +110,13 @@ public class PlayerController : MonoBehaviour, ICanMove
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+
         // Check the collided object and its parent for the IInteractable component
         IInteractable interactable = collision.GetComponent<IInteractable>() ?? collision.transform.parent.GetComponent<IInteractable>();
 
         // Proceed only if an IInteractable component is found
         if (interactable != null)
         {
-           
             interactableInRange = interactable; // Set the current interactable object
             interactableInRange.ShowInteractionPrompt(); // Show interaction prompt
 
