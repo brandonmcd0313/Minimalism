@@ -66,4 +66,10 @@ public abstract class Civilian : MonoBehaviour
         spriteRenderer.color = grayColor;
     }
 
+    public bool IsAlive
+    {
+        get { return isAlive; }
+        set { isAlive = value; }
+    }
+
 }

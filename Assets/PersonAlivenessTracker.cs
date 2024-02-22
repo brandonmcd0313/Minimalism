@@ -4,15 +4,52 @@ using UnityEngine;
 
 public class PersonAlivenessTracker : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private List<Civilian> civilians = new List<Civilian>();
+
+    private void Start()
     {
-        
+        AddAllCivilians();
     }
 
-    // Update is called once per frame
-    void Update()
+    public int GetAliveCount()
     {
-        
+        int aliveCount = 0;
+        foreach (var civilian in civilians)
+        {
+            if (civilian.IsAlive)
+            {
+                aliveCount++;
+            }
+        }
+        return aliveCount;
+    }
+
+    public float GetAlivePercentage()
+    {
+        if (civilians.Count == 0) return 0f;
+        int aliveCount = GetAliveCount();
+        return (float)aliveCount / civilians.Count * 100; // Convert to percentage
+    }
+
+    // This method will be called to add all civilians in the scene to the list
+    public void AddAllCivilians()
+    {
+        // Find all GameObjects tagged as "Person"
+        GameObject[] personObjects = GameObject.FindGameObjectsWithTag("Person");
+
+        // Iterate through each GameObject
+        foreach (var personObject in personObjects)
+        {
+            // Attempt to get the Civilian component
+            Civilian civilian = personObject.GetComponent<Civilian>();
+
+            // If the GameObject has a Civilian component and it's not already in the list, add it
+            if (civilian != null && !civilians.Contains(civilian))
+            {
+                civilians.Add(civilian);
+            }
+        }
     }
 }
+
+
