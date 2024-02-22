@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, ICanMove
 {
     Rigidbody2D rb2d;
     public float speed = 15;
@@ -31,14 +31,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (!canMove)
-        {
-            return;
-        }
-            HandleMovement();
-            HandleJump();
-            HandleInteraction();
-        
+        Move();
         if(Input.GetKeyDown(KeyCode.R))
         {
             transform.position = new Vector3(450, 190, 0);
@@ -186,4 +179,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void Move()
+    {
+        if (!canMove)
+        {
+            return;
+        }
+        HandleMovement();
+        HandleJump();
+        HandleInteraction();
+    }
+
+    void ICanMove.Flip()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void DisableMovement()
+    {
+        canMove = false;
+    }
+
+    public void EnableMovement()
+    {
+        canMove = true;
+    }
 }

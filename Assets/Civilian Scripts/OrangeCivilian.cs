@@ -9,6 +9,7 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
     public GameObject ParticlePrefab;
     private float dirX = -1f;
     [SerializeField] float moveSpeed = 3f;
+    float moveSpeedStorage;
     private bool facingRight = false;
     private Vector3 localScale;
     bool alive = true;
@@ -18,6 +19,7 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
     {
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
+        moveSpeedStorage = moveSpeed;
     }
 
     public void Interact()
@@ -92,5 +94,10 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
     public void DisableMovement() // Implementing DisableMovement method from ICanMove
     {
         moveSpeed = 0;
+    }
+
+    public void EnableMovement() // Implementing EnableMovement method from ICanMove
+    {
+        moveSpeed = moveSpeedStorage;
     }
 }
