@@ -6,7 +6,9 @@ public class TheHolyText : MonoBehaviour
 {
 
     public string[] TheHolyWords;
-    public string[] WorldlyDeeds;
+    public string[] Peace;
+    public string[] War;
+    public string[] OkIGuess;
     public string[] PropheticTexts;
 
     // Start is called before the first frame update
@@ -28,7 +30,8 @@ public class TheHolyText : MonoBehaviour
             TextController.Instance.ShowTextBox(TheHolyWords, TextController.TextType.Pollito);
             switch(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>())
             {
-
+                //Text for not killing anyone
+                TextController.Instance.ShowTextBox(Peace, TextController.TextType.Pollito);
             }
         }
     }
