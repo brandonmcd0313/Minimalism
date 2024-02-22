@@ -20,7 +20,7 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
     {
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
-        moveSpeedStorage = moveSpeed
+        moveSpeedStorage = moveSpeed;
         player = GameObject.Find("Player");
     }
 

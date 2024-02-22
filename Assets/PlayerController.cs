@@ -162,27 +162,6 @@ public class PlayerController : MonoBehaviour, ICanMove
         TextController.Instance.ShowTextBox(new string[] { "MY CHILD, IT IS I... POLLITO..." }, TextController.TextType.Pollito);
     }
 
-
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        // Check the collided object and its parent for the IInteractable component
-        IInteractable interactable = collision.GetComponent<IInteractable>() ?? collision.transform.parent.GetComponent<IInteractable>();
-
-        // Proceed only if an IInteractable component is found and matches interactableInRange
-        if (interactable != null && interactableInRange == interactable)
-        {
-            interactableInRange.HideInteractionPrompt(); // Hide interaction prompt
-            interactableInRange = null; // Clear the current interactable object
-
-            // Deactivate the interaction text UI, if it exists and is assigned
-            if (interactText != null)
-            {
-                interactText.gameObject.SetActive(false);
-            }
-        }
-    }
-
     public void Move()
     {
         if (!canMove)
