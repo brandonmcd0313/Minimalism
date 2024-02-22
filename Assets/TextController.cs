@@ -45,7 +45,6 @@ public class TextController : MonoBehaviour
         switch (type)
         {
             case TextType.Player:
-                Debug.Log("HIT");
                 currentBox = playerBox;
                 currentText = playerText;
                 break;
