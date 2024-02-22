@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class TheHolyText : MonoBehaviour
@@ -10,6 +11,8 @@ public class TheHolyText : MonoBehaviour
     public string[] War;
     public string[] OkIGuess;
     public string[] PropheticTexts;
+    public string[] TheGreatJourneySpeechOfTheHighestBeing;
+    public GameObject personAliveness;
 
     // Start is called before the first frame update
     void Start()
@@ -27,12 +30,25 @@ public class TheHolyText : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            TextController.Instance.ShowTextBox(TheHolyWords, TextController.TextType.Pollito);
-            switch(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>())
+            TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(TheHolyWords).ToArray();
+            switch (personAliveness.GetComponent<PersonAlivenessTracker>().GetAlivePercentage())
             {
-                //Text for not killing anyone
-                TextController.Instance.ShowTextBox(Peace, TextController.TextType.Pollito);
+                case float n when n == 100:
+                    //Text for not killing anyone
+                    TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(Peace).ToArray();
+                    break;
+                case float n when n == 0:
+                    //Text for killing all of the people
+                    TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(War).ToArray();
+                    break;
+                default:
+                    //Text for killing some people
+                    TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(OkIGuess).ToArray();
+                    break;
             }
+            //add the prophetic texts to thegreatjourneyspeechofthehighestbeing
+            TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(PropheticTexts).ToArray();
+            TextController.Instance.ShowTextBox(TheGreatJourneySpeechOfTheHighestBeing, TextController.TextType.Player);
         }
     }
 }

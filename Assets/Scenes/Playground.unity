@@ -14448,6 +14448,50 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9b9ff16fad13b454a95671f7c62d4b19, type: 3}
+--- !u!1 &1617566505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1617566507}
+  - component: {fileID: 1617566506}
+  m_Layer: 0
+  m_Name: PersonAlivenessThingy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1617566506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617566505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abae76ec9d743a742ad5e2a4579fccf3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1617566507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1617566505}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 461.4518, y: 199.39171, z: 0.099318564}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1620887438
 GameObject:
   m_ObjectHideFlags: 0
@@ -18662,7 +18706,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2105926740}
   - component: {fileID: 2105926741}
-  - component: {fileID: 2105926743}
   - component: {fileID: 2105926742}
   m_Layer: 0
   m_Name: PollitoTrigger
@@ -18726,24 +18769,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TheHolyWords:
   - My child... it is I, Pollito...
-  - You have reached your aim of this world, I must commend your dedication...
-  WorldlyDeeds: []
-  PropheticTexts: []
---- !u!114 &2105926743
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2105926739}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 685389b6287d4334693589b441deed4f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  TheHolyWords: []
-  WorldlyDeeds: []
-  PropheticTexts: []
+  - I have watch your deeds in this life and have determined the judgement of your
+    fate...
+  Peace:
+  - You, the faithful, kind, and most caring of all....
+  - You have earned your way into the land of ETERNAL BREAD CRUMBS...
+  - Come........ Join me...... Let us feast..... Together
+  War:
+  - You, the vile, the despicable, the MURDER.....
+  - YOU have taken the souls of all who roamed my peaceful land....
+  - LOOK AT THE WORLD..... ARE YOU PROUD OF THE DESTRUCTION YOU HAVE CAUSED?
+  - You deserve to be banished to this hellscape you have created out of the wonderful
+    vibrance there was....
+  OkIGuess:
+  - You, the weary, burdened traveler.... you are not without sin....
+  - I can not allow this into my kingdom... But there are those more evil who deserve
+    a worse fate than you...
+  PropheticTexts:
+  - If you would like to try again, I shall allow you, the one who climbed to my
+    presense, a chance to start again....
+  - Leave me, and I shall bring about this second chance... Embrace me, and I shall
+    bring you to peace.... The choice is yours.....
+  TheGreatJourneySpeechOfTheHighestBeing: []
+  personAliveness: {fileID: 1617566505}
 --- !u!1 &2109731581
 GameObject:
   m_ObjectHideFlags: 0
