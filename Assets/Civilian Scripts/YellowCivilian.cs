@@ -37,7 +37,11 @@ public class YellowCivilian : Civilian, IInteractable, ICanMove
 
     public void ShowInteractionPrompt()
     {
-        Debug.Log("Show interaction prompt");
+        if (!player.GetComponent<PlayerController>().seeYellow)
+        {
+            player.GetComponent<PlayerController>().seeYellow = true;
+            TextController.Instance.ShowTextBox(new string[] { "Oh, poor yellow fool... you are much to cowardly for this kind world... " }, TextController.TextType.Player);
+        }
     }
 
     public void HideInteractionPrompt()

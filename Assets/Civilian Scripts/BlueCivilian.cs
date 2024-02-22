@@ -8,6 +8,7 @@ public class BlueCivilian : Civilian, IInteractable
     public GameObject ParticlePrefab;
     [SerializeField] float knockbackForce = 10f;
     bool alive = true;
+    private GameObject player;
     
 
 
@@ -15,6 +16,7 @@ public class BlueCivilian : Civilian, IInteractable
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        player = GameObject.Find("Player");
     }
 
     public void Interact()
@@ -35,7 +37,11 @@ public class BlueCivilian : Civilian, IInteractable
 
     public void ShowInteractionPrompt()
     {
-        Debug.Log("Show interaction prompt");
+        if (!player.GetComponent<PlayerController>().seeBlue)
+        {
+            player.GetComponent<PlayerController>().seeBlue = true;
+            TextController.Instance.ShowTextBox(new string[] { "This blue fellow... He is very defensive and stubborn, this isn't right... " }, TextController.TextType.Player);
+        }
     }
 
     public void HideInteractionPrompt()
