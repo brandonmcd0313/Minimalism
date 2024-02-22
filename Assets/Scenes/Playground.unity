@@ -8902,11 +8902,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6520909116647447983, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
       propertyPath: DeathTexts.Array.data[0]
-      value: 'YOU GAY MOTHER- '
+      value: NOOOO........ You-   You will..... regret this....
       objectReference: {fileID: 0}
     - target: {fileID: 6520909116647447983, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
       propertyPath: PromptTexts.Array.data[0]
-      value: 'You are ugly '
+      value: MY SUBJECTS! I am under assult from this imposing figure. COME TO MY
+        AID PEASANTS!!!
       objectReference: {fileID: 0}
     - target: {fileID: 6520909116647447984, guid: 2a2ffdc16faa20043aefe8fd5e08ee65, type: 3}
       propertyPath: m_RootOrder
