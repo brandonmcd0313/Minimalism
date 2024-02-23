@@ -11,7 +11,7 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
     public GameObject ParticlePrefab;
     private float dirX = -1f;
     [SerializeField] float moveSpeed = 3f;
-    float moveSpeedStorage;
+    public float moveSpeedStorage;
     [SerializeField] float attackDistance = 5f;
     bool isChasingPlayer = false;
     private bool facingRight = false;
@@ -26,7 +26,6 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
         player = GameObject.Find("Player");
         localScale = transform.localScale;
         rb = GetComponent<Rigidbody2D>();
-        moveSpeedStorage = moveSpeed;
     }
 
     public void Interact()
@@ -136,6 +135,7 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
 
     public void EnableMovement()
     {
-        moveSpeed = moveSpeedStorage;
+        if (alive)
+            moveSpeed = moveSpeedStorage;
     }
 }

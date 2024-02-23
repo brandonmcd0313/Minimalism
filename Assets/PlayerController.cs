@@ -30,9 +30,12 @@ public class PlayerController : MonoBehaviour, ICanMove
     {
         rb2d = GetComponent<Rigidbody2D>();
         faceRight = true;
+       Invoke("ShowStartText", 0.5f);
+    }
+    void ShowStartText()
+    {
         TextController.Instance.ShowTextBox(new string[] { "This color... The world is too noisey! I must minimalize this chaos...\n\t\t[SPACE] " }, TextController.TextType.Player);
     }
-
     void Update()
     {
         Move();

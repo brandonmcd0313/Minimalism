@@ -209,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ParticlePrefab: {fileID: 5968368714431003544, guid: c4fe533bacec5854c9a62110f37735bf, type: 3}
   moveSpeed: 2
+  moveSpeedStorage: 2
 --- !u!1 &5422603250641437970
 GameObject:
   m_ObjectHideFlags: 0
