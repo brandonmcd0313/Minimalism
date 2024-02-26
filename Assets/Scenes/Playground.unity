@@ -1462,8 +1462,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 139025467}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 252.5868, y: 76.38, z: 0}
-  m_LocalScale: {x: 10.7666025, y: 19.587, z: 1}
+  m_LocalPosition: {x: 252.7427, y: 76.38, z: 0}
+  m_LocalScale: {x: 10.796749, y: 19.587, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -19252,7 +19252,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TheHolyWords:
   - My child... it is I, Pollito...
-  - I have watch your deeds in this life and have determined the judgement of your
+  - I have watched your deeds in this life and have determined the judgement of your
     fate...
   Peace:
   - You, the faithful, kind, and most caring of all....
@@ -19275,6 +19275,7 @@ MonoBehaviour:
     bring you to peace.... The choice is yours.....
   TheGreatJourneySpeechOfTheHighestBeing: []
   personAliveness: {fileID: 1617566505}
+  throneBack: {fileID: 1076499615}
 --- !u!1 &2109731581
 GameObject:
   m_ObjectHideFlags: 0
