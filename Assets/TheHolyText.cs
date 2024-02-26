@@ -48,7 +48,7 @@ public class TheHolyText : MonoBehaviour
             }
             //add the prophetic texts to thegreatjourneyspeechofthehighestbeing
             TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(PropheticTexts).ToArray();
-            TextController.Instance.ShowTextBox(TheGreatJourneySpeechOfTheHighestBeing, TextController.TextType.Player);
+            TextController.Instance.ShowTextBox(TheGreatJourneySpeechOfTheHighestBeing, TextController.TextType.Pollito);
         }
     }
 }
