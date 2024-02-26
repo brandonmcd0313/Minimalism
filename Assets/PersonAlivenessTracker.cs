@@ -5,6 +5,7 @@ using UnityEngine;
 public class PersonAlivenessTracker : MonoBehaviour
 {
     private List<Civilian> civilians = new List<Civilian>();
+    float currentPercentage = 0f;
 
     private void Start()
     {
@@ -30,6 +31,17 @@ public class PersonAlivenessTracker : MonoBehaviour
         int aliveCount = GetAliveCount();
         return (float)aliveCount / civilians.Count * 100; // Convert to percentage
     }
+    private void Update()
+    {
+        float alivePercentage = GetAlivePercentage();
+        if (alivePercentage != currentPercentage)
+        {
+            currentPercentage = alivePercentage;
+            SaturationController saturationController = SaturationController.instance;
+            saturationController.AdjustSaturation(alivePercentage / 100);
+        }
+    }
+    
 
     // This method will be called to add all civilians in the scene to the list
     public void AddAllCivilians()
