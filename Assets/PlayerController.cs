@@ -148,6 +148,30 @@ public class PlayerController : MonoBehaviour, ICanMove
             background.gameObject.SetActive(false);
             StartCoroutine(Pollito());        
         }
+        if(collision.tag == "Gate to Heaven")
+        {
+            //find pollito game object
+            GameObject personAliveness = GameObject.Find("PollitoTrigger").GetComponent<TheHolyText>().personAliveness;
+            float alivePercent = personAliveness.GetComponent<PersonAlivenessTracker>().GetAlivePercentage();
+
+
+            switch (alivePercent)
+            {
+                case float n when n == 100:
+                    //Text for not killing anyone
+                    TextController.Instance.ShowTextBox(new string[] { "Congratulations, you have lived your great life. Come, join me in eternal bread crumbs..." }, TextController.TextType.Pollito);
+                    break;
+                case float n when n == 0:
+                    //Text for killing all of the people
+                    TextController.Instance.ShowTextBox(new string[] { "You have killed everyone. You are a clucking menace to society. You are not worthy of eternal bread crumbs." }, TextController.TextType.Pollito);
+                    break;
+                default:
+                    //Text for killing some people
+                    TextController.Instance.ShowTextBox(new string[] { "Hmm... There are worse... I shall allow you to join me, but you shall not have any bread crumbs..." }, TextController.TextType.Pollito);
+                    break;
+            }
+            StartCoroutine(EndGame());
+        }
     }
 
     IEnumerator Pollito()
@@ -162,7 +186,12 @@ public class PlayerController : MonoBehaviour, ICanMove
         }
         textBox.color = Color.black;
         textBoxBack.transform.localScale = new Vector3(50f, 50f, 50f);
-        TextController.Instance.ShowTextBox(new string[] { "MY CHILD, IT IS I... POLLITO..." }, TextController.TextType.Pollito);
+    }
+
+    IEnumerator EndGame()
+    {
+        yield return new WaitForSeconds(7);
+        SceneManager.LoadScene("StartMenu");
     }
 
     public void Move()

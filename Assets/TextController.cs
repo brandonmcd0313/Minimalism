@@ -76,21 +76,18 @@ public class TextController : MonoBehaviour
         ToggleMovement(false);
         //disable player movement
         player.GetComponent<PlayerController>().canMove = false;
-        for (int k = 0; k < texts.Length; k++)
+        for (int i = 0; i < texts.Length; i++)
         {
-            for (int i = 0; i < texts.Length; i++)
-            {
+            Debug.Log("starting " +  texts[i]);
                 for (int j = 0; j <= texts[i].Length; j++)
                 {
                     //display the text one character at a time
                     currentText.GetComponent<TextMeshProUGUI>().text = texts[i].Substring(0, j);
-                    Debug.Log(texts[i]);
                     yield return new WaitForSeconds(0.05f);
                 }
                 //wait until the player presses the space key
                 yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
-            }
-        }
+           }
         currentBox.SetActive(false);
         //enable player movement
         player.GetComponent<PlayerController>().canMove = true;

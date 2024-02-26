@@ -12,43 +12,51 @@ public class TheHolyText : MonoBehaviour
     public string[] OkIGuess;
     public string[] PropheticTexts;
     public string[] TheGreatJourneySpeechOfTheHighestBeing;
-    public GameObject personAliveness;
+    public GameObject personAliveness, throneBack;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(TheHolyWords).ToArray();
+            throneBack.SetActive(false);
+
+            // Concatenate the arrays
+            List<string> speech = new List<string>(TheHolyWords);
             switch (personAliveness.GetComponent<PersonAlivenessTracker>().GetAlivePercentage())
             {
                 case float n when n == 100:
                     //Text for not killing anyone
-                    TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(Peace).ToArray();
+                    speech.AddRange(Peace);
                     break;
                 case float n when n == 0:
                     //Text for killing all of the people
-                    TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(War).ToArray();
+                    speech.AddRange(War);
                     break;
                 default:
                     //Text for killing some people
-                    TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(OkIGuess).ToArray();
+                    speech.AddRange(OkIGuess);
                     break;
             }
-            //add the prophetic texts to thegreatjourneyspeechofthehighestbeing
-            TheGreatJourneySpeechOfTheHighestBeing = TheHolyWords.Concat(PropheticTexts).ToArray();
-            TextController.Instance.ShowTextBox(TheGreatJourneySpeechOfTheHighestBeing, TextController.TextType.Player);
+            // Add the prophetic texts to the speech
+            speech.AddRange(PropheticTexts);
+
+            // Convert List<string> to string array
+            TheGreatJourneySpeechOfTheHighestBeing = speech.ToArray();
+
+            // Show the text
+            TextController.Instance.ShowTextBox(TheGreatJourneySpeechOfTheHighestBeing, TextController.TextType.Pollito);
         }
     }
 }
