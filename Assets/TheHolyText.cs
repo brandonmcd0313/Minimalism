@@ -33,6 +33,11 @@ public class TheHolyText : MonoBehaviour
             throneBack.SetActive(false);
             //disable saturation
             SaturationController.instance.EnableSaturation(false);
+            //disable audio
+            AudioVolumeController.instance.DisableMusic();
+
+            //play the audiosource attached to this object
+            GetComponent<AudioSource>().Play();
 
             // Concatenate the arrays
             List<string> speech = new List<string>(TheHolyWords);
