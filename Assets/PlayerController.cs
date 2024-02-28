@@ -23,6 +23,7 @@ public class PlayerController : MonoBehaviour, ICanMove
     public bool seeBlue = false;
     public bool seeRed = false;
     public bool seeYellow = false;
+    public bool seePollito = false;
    
     string[] pollitoText = { "MY CHILD, IT IS I... POLLITO...", "YOU ARE A CLUCKING MENACE TO SOCIETY", "BOOM, EXPLOSION, YOU DEAD"};
 
@@ -134,19 +135,25 @@ public class PlayerController : MonoBehaviour, ICanMove
             */
         }
 
-        if(collision.tag == "Pollito")
+        if (collision.tag == "Pollito")
         {
-            //turn off player movement
-            canMove = false;
+            if (seePollito)
+                SceneManager.LoadScene("Playground");
+            else
+            {
+                seePollito = true;
+                //turn off player movement
+                canMove = false;
 
-            //Kill all player movement
-            rb2d.velocity = Vector2.zero;
+                //Kill all player movement
+                rb2d.velocity = Vector2.zero;
 
-            
 
-            //Change the background to pollitoBackground
-            background.gameObject.SetActive(false);
-            StartCoroutine(Pollito());        
+
+                //Change the background to pollitoBackground
+                background.gameObject.SetActive(false);
+                StartCoroutine(Pollito());
+            }
         }
         if(collision.tag == "Gate to Heaven")
         {
