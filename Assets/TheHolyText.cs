@@ -31,6 +31,8 @@ public class TheHolyText : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             throneBack.SetActive(false);
+            //disable saturation
+            SaturationController.instance.EnableSaturation(false);
 
             // Concatenate the arrays
             List<string> speech = new List<string>(TheHolyWords);

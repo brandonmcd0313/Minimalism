@@ -11,6 +11,7 @@ public class SaturationController : MonoBehaviour
     bool isSaturationChanging = false;
     float currentSaturation = 0;
     float targetSaturation = 0;
+    bool isEnabled = true;
     private void Awake()
     {
         if (instance == null)
@@ -42,6 +43,10 @@ public class SaturationController : MonoBehaviour
 
     public void AdjustSaturation(float targetNormalizedSaturation)
     {
+        if (!isEnabled)
+        {
+            return;
+        }
         // Ensure the input is clamped between 0 and 1
         targetNormalizedSaturation = Mathf.Clamp01(targetNormalizedSaturation);
         targetSaturation = targetNormalizedSaturation;
@@ -58,6 +63,10 @@ public class SaturationController : MonoBehaviour
 
     void Update()
     {
+        if (!isEnabled)
+        {
+            return;
+        }
         if (isSaturationChanging)
         {
             return;
@@ -91,4 +100,15 @@ public class SaturationController : MonoBehaviour
         currentSaturation = targetNormalizedSaturation;
         isSaturationChanging = false;
     }
+
+    public void EnableSaturation(bool enable)
+    {
+        isEnabled = enable;
+        if(!isEnabled)
+        {
+            //reset saturation
+            colorGrading.saturation.value = 0;
+        }
+    }
 }
+
