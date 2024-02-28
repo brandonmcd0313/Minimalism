@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3288664155439683722}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: RightTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 3288664155776172153}
   - component: {fileID: 3288664155776172159}
   - component: {fileID: 3288664155776172035}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Blue Civilian
   m_TagString: Person
   m_Icon: {fileID: 0}
@@ -107,8 +107,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 1030340233
+  m_SortingLayer: 1
   m_SortingOrder: 0
   m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
   m_Color: {r: 0, g: 0.04617977, b: 1, a: 1}
@@ -192,7 +192,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3288664156050881229}
   - component: {fileID: 3288664156050881228}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: AbsorptionCollider
   m_TagString: Soul
   m_Icon: {fileID: 0}
@@ -249,7 +249,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3288664156270439664}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: LeftTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
