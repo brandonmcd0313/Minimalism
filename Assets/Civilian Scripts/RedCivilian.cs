@@ -46,7 +46,7 @@ public class RedCivilian : Civilian, IInteractable, ICanMove
         if (!player.GetComponent<PlayerController>().seeRed)
         {
             player.GetComponent<PlayerController>().seeRed = true;
-            TextController.Instance.ShowTextBox(new string[] { "This red warrior is much too aggressive for this peaceful world... " }, TextController.TextType.Player);
+            TextController.Instance.ShowTextBox(new string[] { "This red warrior is much too aggressive for this peaceful world... \n[E to interact]" }, TextController.TextType.Player);
         }
     }
 

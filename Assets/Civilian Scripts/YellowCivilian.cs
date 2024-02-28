@@ -41,7 +41,7 @@ public class YellowCivilian : Civilian, IInteractable, ICanMove
         if (!player.GetComponent<PlayerController>().seeYellow)
         {
             player.GetComponent<PlayerController>().seeYellow = true;
-            TextController.Instance.ShowTextBox(new string[] { "Oh, poor yellow... you are much to cowardly for this kind world... " }, TextController.TextType.Player);
+            TextController.Instance.ShowTextBox(new string[] { "Oh, poor yellow... you are much to cowardly for this kind world... \n[E to interact]" }, TextController.TextType.Player);
         }
     }
 

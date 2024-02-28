@@ -40,7 +40,7 @@ public class BlueCivilian : Civilian, IInteractable
         if (!player.GetComponent<PlayerController>().seeBlue)
         {
             player.GetComponent<PlayerController>().seeBlue = true;
-            TextController.Instance.ShowTextBox(new string[] { "This blue fellow... He is very defensive and stubborn, this isn't right... " }, TextController.TextType.Player);
+            TextController.Instance.ShowTextBox(new string[] { "This blue fellow... He is very defensive and stubborn, this isn't right... \n[E to interact]" }, TextController.TextType.Player);
         }
     }
 

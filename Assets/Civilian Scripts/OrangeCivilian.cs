@@ -40,7 +40,7 @@ public class OrangeCivilian : Civilian, IInteractable, ICanMove
         if (!player.GetComponent<PlayerController>().seeOrange)
         {
             player.GetComponent<PlayerController>().seeOrange = true;
-            TextController.Instance.ShowTextBox(new string[] { "This orange fella... He is too slothful, I must fix this... " }, TextController.TextType.Player);
+            TextController.Instance.ShowTextBox(new string[] { "This orange fella... He is too slothful, I must fix this... \n[E to interact]" }, TextController.TextType.Player);
         }
     }
 
