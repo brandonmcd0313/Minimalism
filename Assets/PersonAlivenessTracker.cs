@@ -39,6 +39,8 @@ public class PersonAlivenessTracker : MonoBehaviour
             currentPercentage = alivePercentage;
             SaturationController saturationController = SaturationController.instance;
             saturationController.AdjustSaturation(alivePercentage / 100);
+            AudioVolumeController audioVolumeController = AudioVolumeController.instance;
+            audioVolumeController.AdjustVolume(alivePercentage / 100);
         }
     }
     
